@@ -1,19 +1,13 @@
 $( document ).ready(function() {
     console.log( "ready!" );
-    loadPlayer();
+    // loadPlayer();
 });
 
+// Input fields
 $('#urlInput').click(function() {
   console.log('slide');
   $('.slider').slideDown(500).css('display', 'flex');
 });
-
-$('#submit').click(function() {
-  $('.slider').slideUp(400);
-  $('#urlInput').val('');
-  $('#artistInput').val('');
-  $('#songInput').val('');
-})
 
 // Initialize Firebase
 var config = {
@@ -26,48 +20,61 @@ var config = {
   firebase.initializeApp(config);
 
 var playerCounter = 1;
+var newVideo;
 
+//Load viddeo click function
 $('#submit').click(function(event){
   event.preventDefault();
   $('#video-feed').append('<div id="player' + playerCounter + '">')
   loadPlayer();
   playerCounter += 1;
-});
 
-function getVideoId() {
-  return "'" + $('#input').val() + "'";
-}
-
-function loadPlayer() { 
-  if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
-    console.log('undefined');
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    
-    window.onYouTubePlayerAPIReady = function() {
-      onYouTubePlayer();
-    };
-  } else {
-    console.log('is defined');
+  function getVideoId() {
+    console.log("'" + $('#urlInput').val() + "'")
+    var newVideo = "'" + $('#urlInput').val() + "'";
   }
-}
 
-var player;
+  // getVideoId();
 
-function onYouTubePlayer() {
-  player = new YT.Player('player' + playerCounter, {
-    height: '490',
-    width: '880',
-    videoId: '6Ci1IB1ijhY',
-    playerVars: { controls:1, showinfo: 0, rel: 0, showsearch: 0, iv_load_policy: 3 },
-    events: {
-      'onStateChange': onPlayerStateChange,
-      'onError': catchError
+  function loadPlayer() { 
+    if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+      console.log('undefined');
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      
+      window.onYouTubePlayerAPIReady = function() {
+        onYouTubePlayer();
+        console.log('onReady');
+      };
+    } else {
+      console.log('is defined');
     }
-  });
-}
+  }
+
+  var player;
+
+  function onYouTubePlayer() {
+    player = new YT.Player('player', {
+      height: '490',
+      width: '880',
+      videoId: getVideoId(),
+      playerVars: { controls:1, showinfo: 0, rel: 0, showsearch: 0, iv_load_policy: 3 },
+      events: {
+        'onStateChange': onPlayerStateChange,
+        'onError': catchError
+      }
+    });
+    console.log('player');
+  }
+  $('.slider').slideUp(400);
+  // $('#urlInput').val('');
+  $('#artistInput').val('');
+  $('#songInput').val('');
+}); //end video loader
+
+
 var done = false;
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.PLAYING && !done) {

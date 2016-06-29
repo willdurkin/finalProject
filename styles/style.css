@@ -77,3 +77,7 @@ button {
   background: #92A8D1;
   color: #fff;
 }
+
+.flex-item {
+  flex-shrink: 1;
+}
