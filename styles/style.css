@@ -1,0 +1,54 @@
+/* General styles */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+ 
+}
+
+/* Header styles */
+header {
+  background-color: #fff;
+  height: 100px;
+}
+
+#blueLogo {
+  font-family: 'Raleway', sans-serif;
+  color: #92A8D1;
+  font-size: 40px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+#pinkLogo {
+  color: #F7CAC9;
+  margin: auto;
+
+}
+
+input {
+  width: 600px;
+  height: 40px;
+  border:  2px dotted #92A8D1;
+  margin:  auto;
+  text-align: center;
+}
+
+button {
+  width: 250px;
+  height: 40px;
+  margin: 20px auto;
+}
+
+.player {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+}
+
+.slider {
+  display: none;
+  align-self: center;
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      <title>lite.fm</title>
+      <link rel="stylesheet" href="styles/normalize.css" media="screen" charset="utf-8">
+      <link rel="stylesheet" href="styles/html5bp.css" media="screen" charset="utf-8">
+      <link rel="stylesheet" href="styles/style.css" media="screen" charset="utf-8">
+      <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    </head>
+
+    <body>
+
+        <header>
+          <section class="container">
+            <h1 id='blueLogo'>lite.fm</h1>
+          </section>
+        </header>
+        <!-- end header -->
+
+        <section id="main" class="container">
+          <form id="inputForm" class="container">
+            <input id='urlInput' type="text" name="name" placeholder="Paste Youtube Video URL Here">
+            <div class="slider">
+              <input id='artistInput' type="text" name="name" placeholder="Artist Name">
+              <input id='songInput' type="text" name="name" placeholder="Song Name">
+            </div>
+            <button id='submit'>SUBMIT</button>
+          </form>
+
+          <section class="container" id='video-feed'>
+            <div id="player"></div>
+          </section>
+
+        </section>
+          <!-- Firebase CDN -->
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/app3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.js"></script>
+
+    </body>
+</html>
