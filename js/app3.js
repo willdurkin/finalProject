@@ -11,6 +11,8 @@ $('#urlInput').click(function() {
 $('#submit').click(function() {
   $('.slider').slideUp(400);
   $('#urlInput').val('');
+  $('#artistInput').val('');
+  $('#songInput').val('');
 })
 
 // Initialize Firebase
