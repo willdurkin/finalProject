@@ -21,25 +21,37 @@ var config = {
 
 var playerCounter = 1;
 var newVideo;
-var player;
+
+
+
 
 //Load viddeo click function
 $('#submit').click(function(event){
   event.preventDefault();
-  // $('#video-feed').append('<div id="player">')
-  loadPlayer();
+  $('#video-feed').append('<div id="player' + playerCounter + '">')
   playerCounter += 1;
 
   function getVideoId() {
-    console.log($('#urlInput').val())
-    return $('#urlInput').val();
+    console.log("'" + $('#urlInput').val() + "'")
+    var newVideo = "'" + $('#urlInput').val() + "'";
   }
 
-  console.log(newVideo);
 
-  // getVideoId();
+ // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
 
-  function loadPlayer() { 
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubePlayer() {
+          player.loadVideoById(newVideo);
+      }
+
+    function loadPlayer() { 
     if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
       console.log('undefined');
       var tag = document.createElement('script');
@@ -49,28 +61,49 @@ $('#submit').click(function(event){
       
       window.onYouTubePlayerAPIReady = function() {
         onYouTubePlayer();
-        console.log('byId');
+        console.log('onReady');
       };
     } else {
       console.log('is defined');
     }
   }
 
+      loadPlayer();
 
+  // getVideoId();
 
-  function onYouTubePlayer() {
-    player = new YT.Player('player', {
-      height: '490',
-      width: '880',
-      videoId: getVideoId(),
-      playerVars: { controls:1, showinfo: 0, rel: 0, showsearch: 0, iv_load_policy: 3 },
-      events: {
-        'onStateChange': onPlayerStateChange,
-        'onError': catchError
-      }
-    });
-    console.log('player');
-  }
+  // function loadPlayer() { 
+  //   if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+  //     console.log('undefined');
+  //     var tag = document.createElement('script');
+  //     tag.src = "https://www.youtube.com/iframe_api";
+  //     var firstScriptTag = document.getElementsByTagName('script')[0];
+  //     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      
+  //     window.onYouTubePlayerAPIReady = function() {
+  //       onYouTubePlayer();
+  //       console.log('onReady');
+  //     };
+  //   } else {
+  //     console.log('is defined');
+  //   }
+  // }
+
+  // var player;
+
+  // function onYouTubePlayer() {
+  //   player = new YT.Player('player', {
+  //     height: '490',
+  //     width: '880',
+  //     videoId: getVideoId(),
+  //     playerVars: { controls:1, showinfo: 0, rel: 0, showsearch: 0, iv_load_policy: 3 },
+  //     events: {
+  //       'onStateChange': onPlayerStateChange,
+  //       'onError': catchError
+  //     }
+  //   });
+  //   console.log('player');
+  // }
   $('.slider').slideUp(400);
   // $('#urlInput').val('');
   $('#artistInput').val('');
@@ -78,26 +111,9 @@ $('#submit').click(function(event){
 }); //end video loader
 
 
-var done = false;
-function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.PLAYING && !done) {
-    // setTimeout(stopVideo, 6000);
-    done = true;
-  }
-  else if(event.data == YT.PlayerState.ENDED)
-  {
-    location.reload();
-  }
-}
 
-function onPlayerReady(event) {
 
-  //if(typeof(SONG.getVideoId()) == undefined)
-  //{
-  //  console.log("undefineeeed"); 
-  //} 
-  //event.target.playVideo();   
-}
+
 
 function catchError(event)
 {
