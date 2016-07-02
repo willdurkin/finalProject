@@ -93,14 +93,14 @@ loadPlayer();
 //Load viddeo click function
 $('#submit').click(function(event){
   event.preventDefault();
-  // $('#video-feed').append('<div id="player">')
-  
-  playerCounter += 1;
-
   function getVideoId() {
     console.log($('#urlInput').val());
     return $('#urlInput').val();
-  }
+  };
+  $('.slider').slideUp(400);
+  $('#urlInput').val('');
+  $('#artistInput').val('');
+  $('#songInput').val('');
 });
 
 function onPlayerReady(event) {
