@@ -6,6 +6,7 @@ $( document ).ready(function() {
 $('#urlInput').click(function() {
   console.log('slide');
   $('.slider').slideDown(500).css('display', 'flex');
+  $('#cancel').slideDown(500);
 });
 
 // Initialize Firebase
@@ -120,3 +121,8 @@ function onPlayerStateChange(event) {
 function stopVideo() {
   player.stopVideo();
 }
+
+$('#cancel').click(function() {
+  $('.slider').slideUp(400);
+  $('#cancel').slideUp(400);
+})

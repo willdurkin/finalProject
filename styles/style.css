@@ -71,6 +71,7 @@ button {
   border-radius: 3px;
   border: 1px dotted #92A8D1;
   color:  #92A8D1;
+  display: inline-block;
 }
 
 #submit:hover {
@@ -83,5 +84,15 @@ button {
 }
 
 .video {
+  margin-bottom: 40px;
+}
+
+#cancel {
+  color:  #92A8D1;
+  font-size: 14px;
+  cursor: pointer;
+  align-self: center;
+  display: none;
+  /*margin-top: -20px;*/
   margin-bottom: 40px;
 }
