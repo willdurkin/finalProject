@@ -29,22 +29,22 @@ function onYouTubePlayer() {
     var weirdIds = Object.keys(videos);
   
     weirdIds.forEach(function(weirdId, index) {
-      console.log(weirdId);
       var videoObject = videos[weirdId];
       var url = videoObject.url;
       var artist = videoObject.artist;
       var song = videoObject.song;
       var votes = videoObject.votes;
-      $('#video-feed').append('<div id=player' + weirdId + '>');
+      console.log(weirdId + ' ' + url);
+      $('#video-feed').append('<div class=video id=player' + weirdId + '>');
       
       var player = new YT.Player('player' + weirdId, {
           height: '490',
           width: '880',
-          videoId: weirdId,
+          videoId: url,
           playerVars: { controls:1, showinfo: 0, rel: 0, showsearch: 0, iv_load_policy: 3 },
           events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            // 'onReady': onPlayerReady,
+            // 'onStateChange': onPlayerStateChange
           }
       });   
     }); //end video loader
@@ -104,7 +104,7 @@ $('#submit').click(function(event){
 });
 
 function onPlayerReady(event) {
-  event.target.playVideo();
+  document.getElementById('existing-iframe-example').style.borderColor = '#FF6D00';
 }
 
 // 5. The API calls this function when the player's state changes.

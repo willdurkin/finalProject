@@ -81,3 +81,7 @@ button {
 .flex-item {
   flex-shrink: 1;
 }
+
+.video {
+  margin-bottom: 40px;
+}
