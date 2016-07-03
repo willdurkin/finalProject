@@ -20,7 +20,7 @@ $('#urlInput').click(function() {
 
 var playerCounter = 1;
 var newVideo;
-var player;
+
 
 function onYouTubePlayer() {
   videosInFirebase.on('value', function(results) {
@@ -36,8 +36,8 @@ function onYouTubePlayer() {
       var song = videoObject.song;
       var votes = videoObject.votes;
       console.log(weirdId + ' ' + url);
-      $('#video-feed').append('<div class=video id=player' + weirdId + '>');
-      
+      $('#video-feed').append('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '>');
+      var player;
       var player = new YT.Player('player' + weirdId, {
           height: '490',
           width: '880',
@@ -94,14 +94,13 @@ loadPlayer();
 //Load viddeo click function
 $('#submit').click(function(event){
   event.preventDefault();
-  function getVideoId() {
-    console.log($('#urlInput').val());
-    return $('#urlInput').val();
-  };
   $('.slider').slideUp(400);
   $('#urlInput').val('');
   $('#artistInput').val('');
   $('#songInput').val('');
+
+  $('#video-feed').empty();
+  onYouTubePlayer();
 });
 
 function onPlayerReady(event) {
