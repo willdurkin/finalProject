@@ -29,6 +29,10 @@ header {
 
 }
 
+h2 {
+
+}
+
 input {
   width: 600px;
   height: 40px;
@@ -84,7 +88,7 @@ button {
 }
 
 .video {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 #cancel {
@@ -95,4 +99,21 @@ button {
   display: none;
   /*margin-top: -20px;*/
   margin-bottom: 40px;
+}
+
+.upvote {
+  width: 60px;
+  height: 30px;
+  background: white;
+  border-radius: 3px;
+  border: 1px dotted #92A8D1;
+  color:  #92A8D1;
+  display: inline-block;
+  padding-top: 6px;
+  margin-bottom: 20px;
+}
+
+.upvote:hover {
+  background: #92A8D1;
+  color: #fff;
 }

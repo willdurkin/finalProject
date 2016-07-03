@@ -21,6 +21,8 @@ $('#urlInput').click(function() {
 var playerCounter = 1;
 var newVideo;
 
+var firebaseDB = firebase.database();
+var videosInFirebase = firebaseDB.ref('urls');
 
 function onYouTubePlayer() {
   videosInFirebase.on('value', function(results) {
@@ -35,8 +37,10 @@ function onYouTubePlayer() {
       var artist = videoObject.artist;
       var song = videoObject.song;
       var votes = videoObject.votes;
+      var videoId = firebaseDB.ref('urls/' + weirdId);
+      var $voteButton = $('<button>').addClass('upvote').html(votes);
       console.log(weirdId + ' ' + url);
-      $('#video-feed').append('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '>');
+      $('#video-feed').append('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '></div>' + $voteButton + '<span>' + votes + ' votes</span>');
       var player;
       var player = new YT.Player('player' + weirdId, {
           height: '490',
@@ -47,7 +51,12 @@ function onYouTubePlayer() {
             // 'onReady': onPlayerReady,
             // 'onStateChange': onPlayerStateChange
           }
-      });   
+      }); 
+      $('$voteButton').click(function() {
+        videoId.update({
+          votes: votes + 1
+        })
+      })  
     }); //end video loader
   });
 }
@@ -69,8 +78,8 @@ function loadPlayer() {
   }
 }
 
-var firebaseDB = firebase.database();
-var videosInFirebase = firebaseDB.ref('urls');
+
+// "Create" a new video object in the database
 
 $('#submit').on('click', function(event) {
   event.preventDefault();
@@ -80,7 +89,6 @@ $('#submit').on('click', function(event) {
   console.log(videoUrl + artistName + songName);
   
 
-  // "Create" a new message object in the database
   videosInFirebase.push({
     url: videoUrl,
     artist: artistName,
@@ -89,9 +97,11 @@ $('#submit').on('click', function(event) {
   });
 });
 
+//Load the player
+
 loadPlayer();
 
-//Load viddeo click function
+//Submite fields functions
 $('#submit').click(function(event){
   event.preventDefault();
   $('.slider').slideUp(400);
@@ -125,3 +135,4 @@ $('#cancel').click(function() {
   $('.slider').slideUp(400);
   $('#cancel').slideUp(400);
 })
+
