@@ -38,7 +38,7 @@ function onYouTubePlayer() {
       var song = videoObject.song;
       var votes = videoObject.votes;
       var videoId = firebaseDB.ref('urls/' + weirdId);
-      var $voteButton = $('<button>').addClass('upvote').html(votes);
+      var $voteButton = $('<button>^</button>').addClass('upvote');
       console.log(weirdId + ' ' + url);
       $('#video-feed').append('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '></div>' + $voteButton + '<span>' + votes + ' votes</span>');
       var player;
@@ -52,7 +52,7 @@ function onYouTubePlayer() {
             // 'onStateChange': onPlayerStateChange
           }
       }); 
-      $('$voteButton').click(function() {
+      $voteButton.click(function() {
         videoId.update({
           votes: votes + 1
         })
