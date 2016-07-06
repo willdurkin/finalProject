@@ -104,7 +104,7 @@ $('#submit').click(function(event){
   }
 
   $('.slider').slideUp(400);
-  // $('#urlInpu  t').val('');
+  $('#urlInput').val('');
   $('#artistInput').val('');
   $('#songInput').val('');
   playerCounter += 1;

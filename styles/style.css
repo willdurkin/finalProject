@@ -1,3 +1,22 @@
+
+/*Fonts*/
+
+@font-face {
+    font-family: Monaco;
+    src: url(../fonts/Monaco.ttf);
+}
+
+@font-face {
+    font-family: Cabin;
+    src: url(../fonts/Monaco.ttf);
+}
+
+body {
+/*    font-family: 'Roboto Condensed', sans-serif;*/    
+    font-weight: 200;
+    letter-spacing: 2px;
+}
+
 /* General styles */
 .container {
   max-width: 1000px;
@@ -30,12 +49,12 @@ header {
 }
 
 h2 {
-  font-family: sans-serif;
   color: #92A8D1;
-  font-size:24px;
-  font-weight: 400;
+  font-size:18px;
+  font-weight: lighter;
   /*text-align: center;*/
-  font-weight: normal;
+  font-weight: 200;
+  letter-spacing: 2px;
 }
 
 input {
@@ -50,6 +69,7 @@ button {
   width: 250px;
   height: 40px;
   margin: 20px auto;
+  letter-spacing: 2px;
 }
 
 .player {
@@ -61,6 +81,7 @@ button {
 .slider {
   display: none;
   align-self: center;
+  letter-spacing: 2px;
 }
 
 #artistInput {
@@ -115,10 +136,15 @@ button {
   color:  #92A8D1;
   display: inline-block;
   padding-top: 6px;
-  margin-bottom: 20px;
+  
 }
 
 .upvote:hover {
   background: #92A8D1;
   color: #fff;
+}
+
+.vote-span {
+  align-self: center;
+  margin-bottom: 20px;
 }

@@ -2,12 +2,19 @@ $( document ).ready(function() {
     console.log( "ready!" );
 });
 
-// Input fields
+// Input fields sider
 $('#urlInput').click(function() {
   console.log('slide');
   $('.slider').slideDown(500).css('display', 'flex');
   $('#cancel').slideDown(500);
 });
+
+
+$('.upvote').click(function() {
+  $(this).css('background', '#92A8D1').html('great');
+  console.log('rock the vote');
+});
+
 
 // Initialize Firebase
  var config = {
@@ -18,7 +25,6 @@ $('#urlInput').click(function() {
   };
   firebase.initializeApp(config);
 
-var playerCounter = 1;
 var newVideo;
 
 var firebaseDB = firebase.database();
@@ -37,10 +43,12 @@ function onYouTubePlayer() {
       var artist = videoObject.artist;
       var song = videoObject.song;
       var votes = videoObject.votes;
+      var plays = videoObject.plays;
       var videoId = firebaseDB.ref('urls/' + weirdId);
       var $voteButton = $('<button>^</button>').addClass('upvote');
       console.log(weirdId + ' ' + url);
-      $('#video-feed').append('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '></div>' + $voteButton + '<span>' + votes + ' votes</span>');
+      
+      $('#video-feed').append('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '></div>').append($voteButton).append('<span class="vote-span">' + votes + ' votes</span>');
       var player;
       var player = new YT.Player('player' + weirdId, {
           height: '490',
@@ -53,10 +61,15 @@ function onYouTubePlayer() {
           }
       }); 
       $voteButton.click(function() {
-        videoId.update({
+        videoId.set({
           votes: votes + 1
         })
-      })  
+      });  
+      $(player).click(function() {
+        videoId.set({
+          plays: plays + 1
+        })
+      });
     }); //end video loader
   });
 }
@@ -93,7 +106,8 @@ $('#submit').on('click', function(event) {
     url: videoUrl,
     artist: artistName,
     song: songName,
-    votes: 0
+    votes: 0,
+    plays: 0,
   });
 });
 
@@ -108,7 +122,6 @@ $('#submit').click(function(event){
   $('#urlInput').val('');
   $('#artistInput').val('');
   $('#songInput').val('');
-
   $('#video-feed').empty();
   onYouTubePlayer();
 });
@@ -126,13 +139,13 @@ function onPlayerStateChange(event) {
     setTimeout(stopVideo, 6000);
     done = true;
   }
-}
+};
+
 function stopVideo() {
   player.stopVideo();
-}
+};
 
 $('#cancel').click(function() {
   $('.slider').slideUp(400);
   $('#cancel').slideUp(400);
-})
-
+});
