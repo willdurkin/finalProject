@@ -134,7 +134,7 @@ button {
   border-radius: 3px;
   border: 1px dotted #92A8D1;
   color:  #92A8D1;
-  display: inline-block;
+  /*display: inline-block;*/
   padding-top: 6px;
   
 }

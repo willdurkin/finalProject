@@ -10,12 +10,6 @@ $('#urlInput').click(function() {
 });
 
 
-$('.upvote').click(function() {
-  $(this).css('background', '#92A8D1').html('great');
-  console.log('rock the vote');
-});
-
-
 // Initialize Firebase
  var config = {
     apiKey: "AIzaSyD33LPylUvbdB7cq8snMUc-_D63l4EQsHM",
@@ -32,7 +26,6 @@ var videosInFirebase = firebaseDB.ref('urls');
 
 function onYouTubePlayer() {
   videosInFirebase.on('value', function(results) {
-    console.log('we got value');
     var videos = results.val();
   
     var weirdIds = Object.keys(videos);
@@ -46,9 +39,8 @@ function onYouTubePlayer() {
       var plays = videoObject.plays;
       var videoId = firebaseDB.ref('urls/' + weirdId);
       var $voteButton = $('<button>^</button>').addClass('upvote');
-      console.log(weirdId + ' ' + url);
       
-      $('#video-feed').append('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '></div>').append($voteButton).append('<span class="vote-span">' + votes + ' votes</span>');
+      $('#video-feed').prepend('<h2>' + artist + ' - ' + song + '</h2><div class=video id=player' + weirdId + '></div>');
       var player;
       var player = new YT.Player('player' + weirdId, {
           height: '490',
@@ -61,7 +53,7 @@ function onYouTubePlayer() {
           }
       }); 
       $voteButton.click(function() {
-        videoId.set({
+        videoId.push({
           votes: votes + 1
         })
       });  
@@ -108,6 +100,7 @@ $('#submit').on('click', function(event) {
     song: songName,
     votes: 0,
     plays: 0,
+    date: 0 - Date.now()
   });
 });
 
@@ -148,4 +141,10 @@ function stopVideo() {
 $('#cancel').click(function() {
   $('.slider').slideUp(400);
   $('#cancel').slideUp(400);
+});
+
+
+$('.upvote').click(function() {
+  $(this).css('background-color', '#92A8D1');
+  console.log('upvote');
 });
